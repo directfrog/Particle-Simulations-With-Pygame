@@ -13,8 +13,9 @@ screen = pygame.display.set_mode((screen_width, screen_height))
 
 particles = []
 for x in range(1000):
-		rect = pygame.Rect(random.randint(0, screen_width-20), random.randint(0, screen_height-20), 10, 10)
-		particles.append([rect, 0])
+	pixel_size = random.randint(1, 10)
+	rect = pygame.Rect(random.randint(0, screen_width-20), random.randint(0, screen_height-20), pixel_size, pixel_size)
+	particles.append([rect, 0])
 
 add = -1
 while True:
@@ -24,13 +25,10 @@ while True:
 		pygame.draw.rect(screen, (255, 255, 255), particle[0])
 		particle_movement = 0
 		
-		if particle[0].y < screen_height-10:
+		
+		increase_factor = (random.randint(1, 3)/10) * add
+		particle[1] += 0.1*add + increase_factor
 
-
-			increase_factor = (random.randint(1, 3)/10) * add
-			particle[1] += 0.1*add + increase_factor
-		else:
-			particle[1] = 0	
 
 		if add == 0:
 			particle_movement -= particle[1]
