@@ -1,3 +1,5 @@
+# press w and s to control the direction of particles
+
 import pygame, sys
 import random
 from pygame.locals import *
