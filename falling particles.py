@@ -14,6 +14,7 @@ for x in range(1000):
 		rect = pygame.Rect(random.randint(0, screen_width-20), random.randint(0, screen_height-20), 10, 10)
 		particles.append([rect, 0])
 
+add = -1
 while True:
 	screen.fill((0, 0, 0))
 	
@@ -22,11 +23,17 @@ while True:
 		particle_movement = 0
 		
 		if particle[0].y < screen_height-10:
-			particle[1] += 1.3
+
+
+			increase_factor = (random.randint(1, 3)/10) * add
+			particle[1] += 0.1*add + increase_factor
 		else:
 			particle[1] = 0	
 
-		particle_movement += particle[1]
+		if add == 0:
+			particle_movement -= particle[1]
+		else:
+			particle_movement += particle[1]
 		particle[0].y += particle_movement
 
 
@@ -34,5 +41,9 @@ while True:
 		if event.type == KEYDOWN:
 			if event.key == K_ESCAPE:
 				sys.exit()
+			if event.key == K_w:
+				add = -1
+			if event.key == K_s:
+				add = 1
 	pygame.display.update()
 	clock.tick(60)
